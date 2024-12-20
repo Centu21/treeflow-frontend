@@ -1,0 +1,144 @@
+/* Header */
+.header-container {
+    background-color: #134611;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .app-title {
+    color: #fdfffc;
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .logo {
+    width: 80px;
+    margin: 10px 0;
+  }
+  
+  .subtitle {
+    color: #fdfffc;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tabla */
+  .container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+  }
+  
+/* Aplicar el color blanco con mayor especificidad */
+.container thead th {
+    background-color: #134611 !important; /* Verde oscuro */
+    color: #fdfffc !important;            /* Texto blanco */
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  
+  /* Celdas de la tabla */
+  .container td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+  
+  /* Filas alternas */
+  .container tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color para filas pares */
+  }
+  
+  .container tr:nth-child(odd) {
+    background-color: #fff; /* Color para filas impares */
+  }
+  
+  /* Botones de acción */
+  .container .actions button {
+    background-color: #3da35d; /* Verde claro */
+    color: #fdfffc;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .container .actions button:hover {
+    background-color: #007bff; /* Azul al pasar el cursor */
+  }
+  
+  /* Asegurar que las columnas tengan el mismo tamaño */
+  .container th,
+  .container td {
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  /* Espacio para la tabla dentro del contenedor */
+  .table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+  }
+  /* Estilos para el modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  background-color: #3da35d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons button:hover {
+  background-color: #007bff;
+}
+
+select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}

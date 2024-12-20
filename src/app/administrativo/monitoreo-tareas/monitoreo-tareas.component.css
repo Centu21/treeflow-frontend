@@ -1,0 +1,60 @@
+/* Header */
+.header-container {
+    background-color: #134611;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .app-title {
+    color: #fdfffc;
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .logo {
+    width: 80px;
+    margin: 10px 0;
+  }
+  
+  .subtitle {
+    color: #fdfffc;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    margin-top: 40px;
+  }
+  
+  /* Botones del panel de opciones */
+  .btn-option {
+    width: 80%;
+    background-color: #3da35d; /* Verde inicial */
+    color: #fdfffc;
+    border: none;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .btn-option:hover {
+    background-color: #007bff !important; /* Cambia a azul al pasar el cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
+  }
+  
+  .btn-option:active {
+    background-color: #0056b3 !important; /* Azul más oscuro al hacer clic */
+    transform: scale(0.98); /* Efecto de clic */
+  }
+  
+  .btn-option:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+  

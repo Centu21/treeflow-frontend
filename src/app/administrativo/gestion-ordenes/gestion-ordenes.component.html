@@ -1,0 +1,162 @@
+<header class="header-container">
+  <h1 class="app-title">TreeFlow</h1>
+  <img src="assets/logo2.png" alt="TreeFlow Logo" class="logo">
+  <p class="subtitle">Gestión Ordenes</p>
+  <app-header></app-header>
+</header>
+
+
+<div class="container">
+  
+  <!-- Filtros dinámicos -->
+  <div class="filters">
+    
+    <label for="comuna_id"></label>
+    <select id="comuna_id" [(ngModel)]="filtros.comuna_id" name="comuna_id">
+      <option value="" disabled selected>COMUNA</option>
+      <option *ngFor="let comuna of comunas" [value]="comuna.id">
+        {{ comuna.nombre }}
+      </option>
+    </select>
+
+    <label for="calle_id"></label>
+    <select id="calle_id" [(ngModel)]="filtros.calle_id" name="calle_id">
+      <option value="" disabled selected>CALLE</option>
+      <option *ngFor="let calle of calles" [value]="calle.id">
+        {{ calle.nombre }}
+      </option>
+    </select>
+
+    <label for="tarea_id"></label>
+    <select id="tarea_id" [(ngModel)]="filtros.tarea_id" name="tarea_id">
+      <option value="" disabled selected>TAREA</option>
+      <option *ngFor="let tarea of tareas" [value]="tarea.id">
+        {{ tarea.descripcion }}
+      </option>
+    </select>
+
+    <label for="item_id"></label>
+    <select id="item_id" [(ngModel)]="filtros.item_id" name="item_id">
+      <option value="" disabled selected>ITEM</option>
+      <option *ngFor="let item of items" [value]="item.id">
+        {{ item.descripcion }}
+      </option>
+    </select>
+
+    <label for="estado_id"></label>
+    <select id="estado_id" [(ngModel)]="filtros.estado_id" name="estado_id">
+      <option value="" disabled selected>ESTADO</option>
+      <option *ngFor="let estado of estados" [value]="estado.id">
+        {{ estado.nombre }}
+      </option>
+    </select>
+
+    <label for="contratista_id"></label>
+    <select id="contratista_id" [(ngModel)]="filtros.contratista_id" name="contratista_id">
+      <option value="" disabled selected>EMPRESA</option>
+      <option *ngFor="let contratista of contratistas" [value]="contratista.id">
+        {{ contratista.nombre }}
+      </option>
+    </select>
+
+    <label for="fecha_limite">Fecha Límite:</label>
+    <input type="date" id="fecha_limite" [(ngModel)]="filtros.fecha_limite" name="fecha_limite" />
+
+    <!-- Botón Buscar -->
+    <button (click)="aplicarFiltros()">BUSCAR</button>
+    <button (click)="restablecerFiltros()">RESTABLECER</button>
+
+  </div>
+
+  <!-- Tabla de mantenimientos -->
+  <table>
+    <thead>
+      <tr>
+        <th>Comuna</th>
+        <th>Calle</th>
+        <th>Altura</th>
+        <th>Referencia</th>
+        <th>Especie</th>
+        <th>Tarea</th>
+        <th>Ítem</th>
+        <th>Observaciones</th>
+        <th>Foto</th>
+        <th>Estado</th>
+        <th>ARME</th>
+        <th>Contratista</th>
+        <th>Fecha Límite</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mantenimiento of mantenimientos">
+        <td>{{ mantenimiento.comuna }}</td>
+        <td>{{ mantenimiento.calle }}</td>
+        <td>{{ mantenimiento.altura }}</td>
+        <td>{{ mantenimiento.referencia }}</td>
+        <td>{{ mantenimiento.especie }}</td>
+        <td>{{ mantenimiento.tarea }}</td>
+        <td>{{ mantenimiento.item }}</td>
+        <td>{{ mantenimiento.observaciones }}</td>
+        <td>
+          <button (click)="verFoto('/assets/images/TAREA.jpeg')">FOTO</button>
+        </td>
+        <td>{{ mantenimiento.estado }}</td>
+        <td>{{ mantenimiento.arme }}</td>
+        <td>{{ mantenimiento.contratista }}</td>
+        <td>{{ mantenimiento.fecha_limite | date:'dd-MM-yyyy' }}</td>
+        <td>
+          <button (click)="seleccionarMantenimiento(mantenimiento)">EDITAR</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal para ver la foto -->
+  <div *ngIf="fotoSeleccionada" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="cerrarFoto()">&times;</span>
+      <img [src]="fotoSeleccionada" alt="Foto del mantenimiento" class="modal-image" />
+    </div>
+  </div>
+
+  <!-- Formulario para editar un mantenimiento -->
+<div *ngIf="mantenimientoSeleccionado">
+  <h3>Editar Mantenimiento</h3>
+  <form (ngSubmit)="guardarCambios()">
+    <!-- Selector de Estado -->
+    <label for="estado_id">ESTADO:</label>
+    <select id="estado_id" [(ngModel)]="mantenimientoSeleccionado.estado_id" name="estado_id" required>
+      <option *ngFor="let estado of estados" [value]="estado.id">
+        {{ estado.nombre }}
+      </option>
+    </select>
+
+    <!-- Campo de ARME -->
+    <label for="arme">ARME:</label>
+    <input type="text" id="arme" [(ngModel)]="mantenimientoSeleccionado.arme" name="arme" required />
+
+    <!-- Selector de Contratista -->
+    <label for="contratista_id">EMPRESA:</label>
+    <select id="contratista_id" [(ngModel)]="mantenimientoSeleccionado.contratista_id" name="contratista_id" required>
+      <option *ngFor="let contratista of contratistas" [value]="contratista.id">
+        {{ contratista.nombre }}
+      </option>
+    </select>
+
+    <!-- Campo de Fecha Límite -->
+    <label for="fecha_limite">FECHA LIMITE:</label>
+    <input type="date" id="fecha_limite" [(ngModel)]="mantenimientoSeleccionado.fecha_limite" name="fecha_limite" required />
+
+    <!-- Botón Guardar -->
+    <button type="submit">GUARDAR</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+</div>

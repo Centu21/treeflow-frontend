@@ -1,0 +1,137 @@
+<header class="header-container">
+  <h1 class="app-title">TreeFlow</h1>
+  <img src="assets/logo2.png" alt="TreeFlow Logo" class="logo">
+  <p class="subtitle">Arboles Censados</p>
+  <app-header></app-header>
+</header>
+
+
+<div class="container">
+ 
+  <!-- Filtros dinámicos -->
+  <div class="filters">
+    
+    <div class="filter-group">
+      <label for="comuna">Comuna:</label>
+      <select id="comuna" [(ngModel)]="filtros.comuna_id">
+        <option [value]="null">Todas</option>
+        <option *ngFor="let comuna of comunas" [value]="comuna.id">
+          {{ comuna.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="calle">Calle:</label>
+      <input
+        type="text"
+        id="calle"
+        [(ngModel)]="filtros.calle_id"
+        placeholder="Buscar calle..."
+        [matAutocomplete]="autoCalle"
+      />
+      <mat-autocomplete #autoCalle="matAutocomplete">
+        <mat-option *ngFor="let calle of calles" [value]="calle.id">
+          {{ calle.nombre }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+    <div class="filter-group">
+      <label for="especie">Especie:</label>
+      <select id="especie" [(ngModel)]="filtros.especie_id">
+        <option [value]="null">Todas</option>
+        <option *ngFor="let especie of especies" [value]="especie.id">
+          {{ especie.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="estado_fitosanitario">Estado Fitosanitario:</label>
+      <select id="estado_fitosanitario" [(ngModel)]="filtros.estado_fitosanitario_id">
+        <option [value]="null">Todos</option>
+        <option *ngFor="let estado of estadosFitosanitarios" [value]="estado.id">
+          {{ estado.estado }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Botones -->
+    <div class="filter-buttons">
+      <button (click)="aplicarFiltros()">Buscar</button>
+      <button (click)="restablecerFiltros()">Restablecer</button>
+    </div>
+  </div>
+
+  <!-- Tabla principal -->
+  <table>
+    <thead>
+      <tr>
+        <th>Comuna</th>
+        <th>Calle</th>
+        <th>Altura</th>
+        <th>Referencia</th>
+        <th>Especie</th>
+        <th>Altura Árbol</th>
+        <th>DAP</th>
+        <th>Estado Fitosanitario</th>
+        <th>Fase Vital</th>
+        <th>Inclinación</th>
+        <th>Ahuecamiento</th>
+        <th>Estado Plantera</th>
+        <th>Ancho Acera</th>
+        <th>Observaciones</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let arbol of arboles">
+        <td>{{ arbol.comuna }}</td>
+        <td>{{ arbol.calle }}</td>
+        <td>{{ arbol.altura }}</td>
+        <td>{{ arbol.referencia }}</td>
+        <td>{{ arbol.especie }}</td>
+        <td>{{ arbol.altura_arbol }}</td>
+        <td>{{ arbol.dap }}</td>
+        <td>{{ arbol.estado_fitosanitario }}</td>
+        <td>{{ arbol.fase_vital }}</td>
+        <td>{{ arbol.inclinacion }}</td>
+        <td>{{ arbol.ahuecamiento }}</td>
+        <td>{{ arbol.estado_plantera }}</td>
+        <td>{{ arbol.ancho_acera }}</td>
+        <td>{{ arbol.observaciones }}</td>
+        <td>
+          <button (click)="verDetalles(arbol)">Ver Detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- Modal para mostrar detalles -->
+<div *ngIf="mostrarDetalles" class="modal">
+  <div class="modal-content">
+    <h2>Detalles del Árbol</h2>
+    <p><strong>Comuna:</strong> {{ arbolSeleccionado?.comuna }}</p>
+    <p><strong>Calle:</strong> {{ arbolSeleccionado?.calle }}</p>
+    <p><strong>Altura:</strong> {{ arbolSeleccionado?.altura }}</p>
+    <p><strong>Referencia:</strong> {{ arbolSeleccionado?.referencia }}</p>
+    <p><strong>Especie:</strong> {{ arbolSeleccionado?.especie }}</p>
+    <p><strong>Observaciones:</strong> {{ arbolSeleccionado?.observaciones || 'N/A' }}</p>
+    <p><strong>Foto:</strong></p>
+<div *ngIf="arbolSeleccionado?.foto; else noFoto">
+  <img [src]="arbolSeleccionado?.foto" alt="Foto del censo" class="tree-photo">
+</div>
+<ng-template #noFoto>
+  <span>No disponible</span>
+</ng-template>
+
+    <button (click)="cerrarDetalles()">Cerrar</button>
+  </div>
+
+  
+</div>
+
+
+
+</div>

@@ -1,0 +1,160 @@
+<header class="header-container">
+  <h1 class="app-title">TreeFlow</h1>
+  <img src="assets/logo2.png" alt="TreeFlow Logo" class="logo">
+  <p class="subtitle">Mantenimiento de Árbol</p>
+  <app-header></app-header>
+</header>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-5">
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #mantenimientoForm="ngForm">
+            <!-- Comuna -->
+            <div class="mb-3">
+              <label for="comuna" class="form-label">Comuna</label>
+              <select
+                id="comuna"
+                class="form-select"
+                [(ngModel)]="comuna"
+                name="comuna"
+                (change)="onFilterChange()"
+                required
+              >
+                <option value="" disabled selected>Seleccionar comuna</option>
+                <option *ngFor="let comuna of comunas" [value]="comuna.id">
+                  {{ comuna.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Calle -->
+            <div class="mb-3">
+              <label for="calle" class="form-label">Calle</label>
+              <select
+                id="calle"
+                class="form-select"
+                [(ngModel)]="calle"
+                name="calle"
+                (change)="onFilterChange()"
+                required
+              >
+                <option value="" disabled selected>Seleccionar calle</option>
+                <option *ngFor="let calle of calles" [value]="calle.id">
+                  {{ calle.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Altura -->
+            <div class="mb-3">
+              <label for="altura" class="form-label">Altura</label>
+              <input
+                type="number"
+                id="altura"
+                class="form-control"
+                [(ngModel)]="altura"
+                name="altura"
+                (input)="onFilterChange()"
+              />
+            </div>
+
+            <!-- Referencia -->
+            <div class="mb-3">
+              <label for="referencia" class="form-label">Referencia</label>
+              <select
+                id="referencia"
+                class="form-select"
+                [(ngModel)]="referencia"
+                name="referencia"
+                (change)="onFilterChange()"
+              >
+                <option value="" disabled selected>Seleccionar referencia</option>
+                <option *ngFor="let referencia of referencias" [value]="referencia.id">
+                  {{ referencia.descripcion }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Especie -->
+            <div class="mb-3">
+              <label for="especie" class="form-label">Especie</label>
+              <select
+                id="especie"
+                class="form-select"
+                [(ngModel)]="especie"
+                name="especie"
+                (change)="onFilterChange()"
+              >
+                <option value="" disabled selected>Seleccionar especie</option>
+                <option *ngFor="let especie of especies" [value]="especie.id">
+                  {{ especie.nombre }}
+                </option>
+              </select>
+            </div>
+
+
+            <!-- Resultados -->
+ <div class="mb-3">
+           <label for="resultado" class="form-label">Seleccionar Árbol</label>
+  <select
+    id="resultado"
+    class="form-select"
+    [(ngModel)]="selectedArbol"
+    name="selectedArbol"
+    required
+  >
+    <option value="" disabled selected>Seleccionar árbol</option>
+    <option *ngFor="let arbol of arbolesFiltrados" [value]="arbol.arbol_id">
+      {{ arbol.comuna || 'Sin Comuna' }} - {{ arbol.calle || 'Sin Calle' }} {{ arbol.altura || 'Sin Altura' }} - 
+      {{ arbol.referencia || 'Sin Referencia' }} - {{ arbol.especie || 'Sin Especie' }}
+    </option>
+  </select>
+</div>
+
+
+
+
+
+
+
+
+
+            <!-- Tipo de Tarea -->
+            <div class="mb-3">
+              <label for="tipoTarea" class="form-label">Tipo de Tarea</label>
+              <select id="tipoTarea" class="form-select" [(ngModel)]="tarea" name="tipoTarea" required>
+                <option value="" disabled selected>Seleccionar tipo de tarea</option>
+                <option *ngFor="let tarea of tareas" [value]="tarea.id">{{ tarea.descripcion }}</option>
+              </select>
+            </div>
+
+            <!-- Ítem -->
+            <div class="mb-3">
+              <label for="item" class="form-label">Ítem</label>
+              <select id="item" class="form-select" [(ngModel)]="item" name="item" required>
+                <option value="" disabled selected>Seleccionar ítem</option>
+                <option *ngFor="let item of items" [value]="item.id">{{ item.descripcion }}</option>
+              </select>
+            </div>
+
+            <!-- Observaciones -->
+            <div class="mb-3">
+              <label for="observaciones" class="form-label">Observaciones</label>
+              <textarea id="observaciones" class="form-control" [(ngModel)]="observaciones" name="observaciones" maxlength="300"></textarea>
+            </div>
+
+            <!-- Foto -->
+            <div class="mb-3">
+              <label for="foto" class="form-label">Foto</label>
+              <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="mantenimientoForm.invalid">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

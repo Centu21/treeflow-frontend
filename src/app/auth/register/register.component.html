@@ -1,0 +1,74 @@
+<header class="header-container">
+  <h1 class="app-title">TreeFlow</h1>
+  <img src="assets/logo2.png" alt="TreeFlow Logo" class="logo">
+  <p class="subtitle">Crear una cuenta</p>
+</header>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card mt-5">
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">Nombre</label>
+              <input type="text" id="firstName" class="form-control" [(ngModel)]="firstName" name="firstName" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Apellido</label>
+              <input type="text" id="lastName" class="form-control" [(ngModel)]="lastName" name="lastName" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="cuit" class="form-label">CUIT</label>
+              <input type="text" id="cuit" class="form-control" [(ngModel)]="cuit" name="cuit" pattern="^[0-9]{11}$" required>
+              <div *ngIf="registerForm.controls['cuit']?.invalid && registerForm.controls['cuit']?.touched" class="error">
+                El CUIT debe tener 11 caracteres numéricos.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required email>
+              <div *ngIf="registerForm.controls['email']?.invalid && registerForm.controls['email']?.touched" class="error">
+                El correo ingresado es incorrecto.
+              </div>
+            </div>
+
+            <div class="mb-3 position-relative">
+              <label for="password" class="form-label">Contraseña</label>
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                id="password" 
+                class="form-control" 
+                [(ngModel)]="password" 
+                name="password" 
+                required
+              >
+              <button type="button" class="btn btn-link show-password-btn" (click)="togglePasswordVisibility()">
+                <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            
+
+            <div class="mb-3">
+              <label for="role" class="form-label">Rol</label>
+              <select id="role" class="form-control" [(ngModel)]="role" name="role" required>
+                <option value="Inspector">Inspector</option>
+                <option value="Administrativo">Administrativo</option>
+                <option value="Empresa">Empresa</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">Registrarse</button>
+          </form>
+
+          <div class="text-center mt-3">
+            <a routerLink="/auth/login">¿Ya tienes cuenta? Iniciar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

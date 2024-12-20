@@ -1,0 +1,38 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #134611;
+    padding: 20px;
+    color: #fdfffc;
+  }
+  
+  .app-title {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .greeting {
+    margin-right: 15px;
+    font-size: 16px;
+  }
+  
+  .logout-btn {
+    background-color: #3da35d;
+    color: #fdfffc;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .logout-btn:hover {
+    background-color: #2a7a44;
+  }
+  

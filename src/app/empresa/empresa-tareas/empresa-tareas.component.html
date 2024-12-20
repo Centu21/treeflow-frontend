@@ -1,0 +1,120 @@
+<header class="header-container">
+  <h1 class="app-title">TreeFlow</h1>
+  <img src="assets/logo2.png" alt="TreeFlow Logo" class="logo">
+  <p class="subtitle">Gestión Ordenes Empresa</p>
+  <app-header></app-header>
+</header>
+
+
+<div class="container">
+  <h2>Ordenes de Mantenimiento Asignadas</h2>
+
+    <!-- Filtros dinámicos -->
+    <div class="filters">
+      <label for="comuna_id"></label>
+      <select id="comuna_id" [(ngModel)]="filtros.comuna_id" name="comuna_id">
+        <option value="" disabled selected>COMUNA</option>
+        <option *ngFor="let comuna of comunas" [value]="comuna.id">
+          {{ comuna.nombre }}
+        </option>
+      </select>
+  
+      <label for="calle_id"></label>
+      <select id="calle_id" [(ngModel)]="filtros.calle_id" name="calle_id">
+        <option value="" disabled selected>CALLE</option>
+        <option *ngFor="let calle of calles" [value]="calle.id">
+          {{ calle.nombre }}
+        </option>
+      </select>
+  
+      <label for="tarea_id">TAREA:</label>
+      <select id="tarea_id" [(ngModel)]="filtros.tarea_id" name="tarea_id">
+      <option value="" disabled selected>Seleccione una tarea</option>
+      <option *ngFor="let tarea of tareas" [value]="tarea.id">
+        {{ tarea.descripcion }}
+      </option>
+      </select>
+
+
+
+  
+      <label for="item_id"></label>
+      <select id="item_id" [(ngModel)]="filtros.item_id" name="item_id">
+        <option value="" disabled selected>ITEM</option>
+        <option *ngFor="let item of items" [value]="item.id">
+          {{ item.descripcion }}
+        </option>
+      </select>
+  
+      <label for="estado_id"></label>
+      <select id="estado_id" [(ngModel)]="filtros.estado_id" name="estado_id">
+        <option value="" disabled selected>ESTADO</option>
+        <option *ngFor="let estado of estados" [value]="estado.id">
+          {{ estado.nombre }}
+        </option>
+      </select>
+  
+  
+      <!-- Botones de acción -->
+      <button (click)="aplicarFiltros()">BUSCAR</button>
+      <button (click)="restablecerFiltros()">RESTABLECER</button>
+    </div>
+  
+  
+
+  <table>
+    <thead>
+      <tr>
+        <th>Comuna</th>
+        <th>Calle</th>
+        <th>Altura</th>
+        <th>Referencia</th>
+        <th>Especie</th>
+        <th>Tarea</th>
+        <th>Ítem</th>
+        <th>Observaciones</th>
+        <th>Estado</th>
+        <th>ARME</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarea of tareas">
+        <td>{{ tarea.comuna }}</td>
+        <td>{{ tarea.calle }}</td>
+        <td>{{ tarea.altura }}</td>
+        <td>{{ tarea.referencia }}</td>
+        <td>{{ tarea.especie }}</td>
+        <td>{{ getDescripcionTarea(tarea.tarea_id) }}</td>
+        <td>{{ getDescripcionItem(tarea.item_id) }}</td>
+        <td>{{ tarea.observaciones }}</td>
+        <td>{{ getDescripcionEstado(tarea.estado_id) }}</td>
+        <td>{{ tarea.arme }}</td>
+        <td>
+          <button (click)="seleccionarTarea(tarea)">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal para editar la tarea -->
+  <div *ngIf="tareaSeleccionada" class="modal">
+    <div class="modal-content">
+      <h3>Editar Tarea de Mantenimiento</h3>
+
+      <label for="estado">Estado:</label>
+      <select id="estado" [(ngModel)]="tareaSeleccionada.estado_id">
+        <option *ngFor="let estado of estados" [value]="estado.id">{{ estado.nombre }}</option>
+      </select>
+
+      <label for="arme">ARME:</label>
+      <input type="text" id="arme" [(ngModel)]="tareaSeleccionada.arme" />
+
+
+      <div class="modal-buttons">
+        <button (click)="guardarCambios()">Guardar</button>
+        <button (click)="tareaSeleccionada = null">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
